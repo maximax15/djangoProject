@@ -16,8 +16,10 @@ def my_blog2(request):
 
 
 def tab1(request):
-    return render(request, "first_post", {})
+    my_post = Post.objects.get(id=1)
+    return render(request, "first_post.html", {"my_post": my_post})
 
 
 def tab2(request):
-    return render(request, "second_post", {})
+    my_post = Post.objects.get(id=2)
+    return render(request, "second_post.html", {"my_post_2": my_post})
