@@ -6,8 +6,12 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
             <div class="site-heading">
-                <h1>{{ my_post_1.title }}</h1>
-                <span class="subheading">{{ my_post_1.content }}</span>
+                <h1>New article</h1>
+                <form action="/blog/new_article" method="POST">
+                    {% csrf_token %} 
+                    {{ new_post_form }}
+                    <input type="submit">
+                </form>
             </div>
         </div>
     </div>
