@@ -12,7 +12,6 @@ class Category(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=60)
     content = models.TextField()
-    pages = models.IntegerChoices("Pages", "1 2 3")
     categories = models.ManyToManyField(Category)
 
     def __str__(self) -> str:

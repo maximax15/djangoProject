@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container">
+    <h2>My article</h2>
+
+    <table class="table table-bordered table-hover ">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>title</th>
+                <th>content</th>
+                <th>categories</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for el in all%}
+            <tr onclick="window.location.href='{% url 'read_post' post_id=el.id %}'" style="cursor: pointer;">
+                <td >{{ el.id }}</td>
+                <td >{{ el.title }}</td>
+                <td class="col">{{ el.content }}</td>
+                <td class="col">
+                    {% for category in el.categories.all %}
+                    {{ category.name }}
+                    {% endfor %}
+                </td>
+                <td>
+                    <form action="{% url 'up_article' post_id=el.id %}" method="GET">
+                        {% csrf_token %}
+                        {{ post_form }}
+                        <input class="btn btn-success" type="submit" value="Update">
+                    </form>
+                </td>
+                <td>
+                    <form action="{% url 'del_article' post_id=el.id %}">
+                        {% csrf_token %}
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+
+
+            {%endfor%}
+        </tbody>
+
+    </table>
+
+
+
+</div>
+
+
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div id="posts-box" class="col-md-10 col-lg-8 col-xl-7">
+            <!-- Pager-->
+            <div id="pager" class="d-flex justify-content-end mb-4">
+                <button class="btn btn-primary text-uppercase" onclick="load_posts()">Older Posts →</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
